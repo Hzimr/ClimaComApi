@@ -4,8 +4,10 @@ document.querySelector('#search').addEventListener('submit', async(event) => {
 
   const cityName = document.querySelector('#city_name').value;
 
-  if (!cityName) { 
-    return showAlert('Você precisa digitar uma cidade...');
+  if (!cityName) {
+    document.querySelector("#weather").classList.remove('show'); 
+    showAlert('Você precisa digitar uma cidade...');
+    return
   }
 
   const apiKey ='2b3207989751c6fd95d19ce93c6e7bd3';
@@ -27,7 +29,11 @@ document.querySelector('#search').addEventListener('submit', async(event) => {
       humidity: json.main.humidity,
     })
   } else {
-    showAlert('Não foi possível localizar...')
+    document.querySelector("#weather").classList.remove('show');
+    showAlert(`
+      Não foi possível localizar...
+      <img src="src/images/nofound.svg" />
+    `)
   }
 });
 
